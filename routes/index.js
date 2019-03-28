@@ -48,21 +48,27 @@ router.get('/edit', (req, res) => {
 
 router.post('/edit', (req, res) => {
     SuperheroCollection.findOne({id: req.body.id}, (error, results) => {
-        if (error) res.send(error);
+        if (error){
+            res.send(error);
+        }
         else {
-            console.log(results);
-            res.render('editChange', {findResults: results})
+            if (results){
+                res.render('editChange', {findResults: results})
+            }
+            else{
+                res.render('edit',{isEmpty:true})
+            }
+
         }
     })
 });
 //fixme
 router.post('/editChange', (req, res) => {
-    SuperheroCollection.updateOne(req.body, (error) => {
+    SuperheroCollection.updateOne({id:req.body.id}, req.body, (error) => {
             if (error) res.send(error);
             else {
                 console.log(req.body);
-                // res.render('editChange',{findResults:req.body,isSent:'sent'})
-                res.send('updated')
+                res.render('editChange', {findResults:req.body,isSent:'sent'})
             }
         })
 });
