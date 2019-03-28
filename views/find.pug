@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1  Find User
-    form(method="POST")
+    form(method="POST" action='./find')
         p
             label(for='id') Enter the ID for the user:
             input(type='text', id='id', name='id')

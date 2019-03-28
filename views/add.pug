@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1  Add User
-    form(method="POST")
+    form(method="POST", action='./add')
         p
             label(for='id') Enter the ID for the user:
             input(type='text', id='id', name='id')
